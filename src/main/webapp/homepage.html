@@ -3,7 +3,15 @@
   <head>Home Page
 </head>
 <p id='status'>Not Logged In</p>
-
+<div class="card-group" id="printName" style="margin-top: 1rem;"></div>
+<br>
+<div>
+  <form id = "add-mood-form">
+    <input type="number" name="mood" placeholder="1" min = 1 max =10 required>
+    <button>Add Mood</button>
+  </form>
+  <ul id = "mood-list"></ul>
+</div>
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
@@ -31,11 +39,127 @@
 
     
     firebase.auth().onAuthStateChanged(function(user) {
+    let res = document.getElementById("printName");
+    res.innerHTML = '';
     if (user) {
         // User is signed in.
         // window.onload = function what(){
         document.getElementById("status").innerHTML = "Signed in as " + user.email;
-        // }
+        // console.log(db.collection('users').doc(user.uid).getElementById('name'));
+
+        // db.collection("users").get().then((querySnapshot) => {
+        // querySnapshot.forEach((doc) => {
+    //         console.log(doc.id, " => ", doc.data());
+    //       res.innerHTML+= `
+    //       <h3 class="card-title">Hello ${doc.data().name}! Here's your Mood History: </h3>
+    //         `
+    //     });
+    // });
+        //this code outputs the user's name
+
+
+
+const moodList = document.querySelector('#mood-list');
+const currDate = new Date().getTime();
+const moodForm = document.querySelector('#add-mood-form');
+const signupForm = document.querySelector('#myForm');
+
+//create elements and render cafe
+function renderMoods(doc){
+    let li = document.createElement('li');
+    let moodNum = document.createElement('span');
+    let date = document.createElement('span');
+    let user = document.createElement('span');
+
+    li.setAttribute('data-id', doc.id);
+    moodNum.textContent = doc.data().mood;
+    date.textContent = doc.data().date;
+
+    li.appendChild(moodNum);
+    li.appendChild(date);
+
+    moodList.appendChild(li);
+}
+
+//getting data
+db.collection('moods').get().then((snapshot) => {
+    console.log(snapshot.docs);
+    snapshot.docs.forEach(doc => {
+        renderMoods(doc);
+    })
+})
+
+//saving data
+moodForm.addEventListener('submit', (e) => {
+    //prevents the entire page from being refreshed
+    e.preventDefault();
+    db.collection('moods').add({
+        mood: moodForm.mood.value,
+        date: new Date(),
+        user: db.collection('users').doc(user.uid)
+
+    })
+    moodForm.mood.value = '';
+
+})
+
+
+
+
+
+        var userName = db.collection("users").doc(user.uid);
+        userName.get().then((doc) => {
+        if (doc.exists) {
+            res.innerHTML+= `
+            <h3 class="card-title">Hello ${doc.data().name}! Here's your Mood History: </h3>
+                `
+        } else {
+        // doc.data() will be undefined in this case
+            console.log("No such document!");
+         }
+        }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+
+//print mood of user
+        // var userMood = db.collection("moods").doc(user.uid);
+
+
+        db.collection("moods").where("user", "==", true)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                res.innerHTML+= `
+          <h3 class="card-title">Mood: ${doc.data()}! </h3>
+            `
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+
+
+
+    //     db.collection("moods").doc(user.uid).then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //         console.log(doc.id, " => ", doc.data());
+    //       res.innerHTML+= `
+    //       <h3 class="card-title">Mood: ${doc.data().mood}! </h3>
+    //         `
+    //     });
+    // });
+
+
+
+
+
+
+
+
         // ...
     } else {
         // User is signed out.
