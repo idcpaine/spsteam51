@@ -84,7 +84,7 @@ function renderMoods(doc){
 
 //getting data
 db.collection('moods').get().then((snapshot) => {
-    console.log(snapshot.docs);
+    // console.log(snapshot.docs);
     snapshot.docs.forEach(doc => {
         renderMoods(doc);
     })
@@ -127,14 +127,15 @@ moodForm.addEventListener('submit', (e) => {
         // var userMood = db.collection("moods").doc(user.uid);
 
 
-        db.collection("moods").where("user", "==", true)
+        db.collection("moods").where("user", "==", db.collection("users").doc(user.uid))
+        // db.collection("moods")
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 res.innerHTML+= `
-          <h3 class="card-title">Mood: ${doc.data()}! </h3>
+          <h3 class="card-title">Mood: ${doc.data().mood} </h3>
             `
             });
         })
