@@ -2,4 +2,84 @@
 <html>
   <head>Home Page
 </head>
+<p id='status'>Not Logged In</p>
+
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-storage.js"></script>
+
+<script>
+    var firebaseConfig = {
+        // I inserted the API keys here from the firebase website
+        apiKey: "AIzaSyByQ1x4KkkwxoXVydDtvo3BHSZhAROicM4",
+        authDomain: "sps-2021.firebaseapp.com",
+        projectId: "sps-2021",
+        storageBucket: "sps-2021.appspot.com",
+        messagingSenderId: "766739795741",
+        appId: "1:766739795741:web:299c84c96dfba80d011bf4",
+        measurementId: "G-6B64JV5KT0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    var db = firebase.firestore();
+
+    // const formElem = document.querySelector('form');
+
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is signed in.
+        // window.onload = function what(){
+        document.getElementById("status").innerHTML = "Signed in as " + user.email;
+        // }
+        // ...
+    } else {
+        // User is signed out.
+        // window.onload = function what(){
+        document.getElementById("status").innerHTML = "Not Logged In";
+        // }
+        // ...
+    }
+    });
+        
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+            text: "Mood Chart"
+        },
+        data: [{        
+            type: "line",
+              indexLabelFontSize: 16,
+            dataPoints: [
+                { y: 450 },
+                { y: 414},
+                { y: 520},
+                { y: 460 },
+                { y: 450 },
+                { y: 500 },
+                { y: 480 },
+                { y: 480 },
+                { y: 410},
+                { y: 500 },
+                { y: 480 },
+                { y: 510 }
+            ]
+        }]
+    });
+    chart.render();
+    
+    }
+    </script>
+    </head>
+    <body>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
 </html>
