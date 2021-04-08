@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>Home Page
+  <head>
+    Home Page
+<!-- Link for push notifications  -->
+<script src="https://cdn.gravitec.net/storage/bcdc1764647858b01d53bc0c1e752d57/client.js" async></script>
 </head>
 <p id='status'>Not Logged In</p>
 <div class="card-group" id="printName" style="margin-top: 1rem;"></div>
@@ -18,7 +21,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-storage.js"></script>
-
+ 
+  
 <script>
     var firebaseConfig = {
         // I inserted the API keys here from the firebase website
@@ -223,5 +227,13 @@ moodForm.addEventListener('submit', (e) => {
     <body>
     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <!-- Breathing Exercise Video -->
+     <h1 class= "center" >Here is a recommended breathing exercise!<h1/>
+     <iframe class="center" width="560" height="315" src="https://www.youtube.com/embed/odADwWzHR24?start=23" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     <div/>
+    <style>
+    .center { margin: 0 auto; width: 400px; }
+    <style/>
+
     </body>
 </html>
