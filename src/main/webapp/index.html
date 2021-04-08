@@ -70,7 +70,10 @@
         if (user) {
           // User is signed in.
           document.getElementById("status").innerHTML = "Signed in as " + user.email;
-          window.location = '/Users/isabellapaine/Desktop/SPS-2021/spsteam51/src/main/webapp/homepage.html';
+          // window.location = '/src/main/webapp/homepage.html';
+          window.location = '../webapp/homepage.html';
+          // window.location = <a href='/src/main/webapp/homepage.html'></a>;
+
           // <meta http-equiv="refresh" content="0; URL=https://www.bitdegree.org/" />
           // ...
         } else {
