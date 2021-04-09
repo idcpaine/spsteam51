@@ -958,7 +958,7 @@ body {
 
 #homepage{
     padding-top: 100px;
-    height: 100vh;
+    height: 100%;
     /* height: 150vh; */
 
     width: 100%;
@@ -970,6 +970,11 @@ body {
     box-sizing: border-box;
 }
 h1{
+    /* min-width : 500px;
+    min-height : 10px; */
+
+    /* padding-top: 200px; */
+    overflow: hidden;
     font-weight: bold;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -986,6 +991,7 @@ h1{
     display: flex;
     justify-content: center;
     padding-bottom: 100px;
+
     
 }
 button{
