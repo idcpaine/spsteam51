@@ -122,11 +122,10 @@ moodForm.addEventListener('submit', (e) => {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 tableValues.push(doc.data().mood);
-                console.log(doc.data().mood);
+                console.log("mood recorded: "+doc.data().mood);
                 console.log("length inside: "+ tableValues.length);
-                console.log(tableValues[0]);
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
                 res.innerHTML+= `
           <h3 class="card-title">Mood: ${doc.data().mood} </h3>
             `
@@ -144,7 +143,6 @@ moodForm.addEventListener('submit', (e) => {
 
         console.log("length outside if-else: "+tableValues.length);
     window.onload = function () {
-    console.log(tableValues[0]);
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         theme: "light2",
