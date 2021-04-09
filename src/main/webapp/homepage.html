@@ -5,6 +5,8 @@
     Home Page
 <!-- Link for push notifications  -->
 <link rel="stylesheet" href="homepage.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 <script src="https://cdn.gravitec.net/storage/bcdc1764647858b01d53bc0c1e752d57/client.js" async></script>
 </head>
 <p id='status'>Not Logged In</p>
@@ -155,21 +157,21 @@ moodForm.addEventListener('submit', (e) => {
             type: "line",
               indexLabelFontSize: 16,
             dataPoints: [
-                { y: parseInt(tableValues[0])},
-                { y: parseInt(tableValues[1])},
-                { y: parseInt(tableValues[2])},
-                { y: parseInt(tableValues[3])},
-                { y: parseInt(tableValues[4])},
-                { y: parseInt(tableValues[5])},
-                { y: parseInt(tableValues[6])},
+                { x:1, y: parseInt(tableValues[0])},
+                { x:2, y: parseInt(tableValues[1])},
+                { x:3, y: parseInt(tableValues[2])},
+                { x:4, y: parseInt(tableValues[3])},
+                { x:5, y: parseInt(tableValues[4])},
+                { x:6, y: parseInt(tableValues[5])},
+                { x:7, y: parseInt(tableValues[6])},
 
 
             ]
         }]
     });
     chart.render();
-    
     }
+    
 
 
 
