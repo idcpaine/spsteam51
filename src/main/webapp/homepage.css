@@ -1,0 +1,36 @@
+#homepage-big{
+    padding-top: 100px;
+    /* height: 100vh; */
+    width: 100%;
+    background-color:#ADD8E6;
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;   
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  white-space: nowrap;
+  overflow: hidden;    
+  /* font-family: 'Source Code Pro', monospace;   */
+  font-size: 28px;
+  color: white;
+}
+
+/* Animation */
+h3 {
+  animation: animated-text 2s steps(30,end) 1s 1 normal both;
+}
+
+/* text animation */
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 1000px;}
+}
