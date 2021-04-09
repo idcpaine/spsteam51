@@ -959,6 +959,8 @@ body {
 #homepage{
     padding-top: 100px;
     height: 100vh;
+    /* height: 150vh; */
+
     width: 100%;
     background-color:#ADD8E6;
     background-position: center;
@@ -978,11 +980,12 @@ h1{
 #buttons{
     
 
-    padding-top: 100px;
+    padding-top: 30px;
     flex-basis: 50%;
     /* align-items: center; */
     display: flex;
     justify-content: center;
+    padding-bottom: 100px;
     
 }
 button{
