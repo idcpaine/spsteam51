@@ -23,14 +23,13 @@ h3 {
   color: white;
 }
 
-/* Animation */
-h3 {
-  animation: animated-text 2s steps(30,end) 1s 1 normal both;
+
+#buttons{
+    flex-basis: 50%;
+    display: flex;
+    padding-bottom: 100px;
+
+    
 }
 
-/* text animation */
 
-@keyframes animated-text{
-  from{width: 0;}
-  to{width: 1000px;}
-}
