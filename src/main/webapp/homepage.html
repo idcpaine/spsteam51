@@ -49,7 +49,6 @@
     var db = firebase.firestore();
 
 
-
     var tableValues = new Array(0);
     firebase.auth().onAuthStateChanged(function(user) {
     let res = document.getElementById("printName");
@@ -58,59 +57,24 @@
         // User is signed in.
         document.getElementById("status").innerHTML = "Signed in as " + user.email;
         //this code outputs the user's name
-
-    //if clicked logout or just not logged in, then should redirect you to login/sign up page
-    if(document.getElementById("status").innerHTML == "Not Logged In"){
-        console.log("Entered");
-        window.location = '/logsign.html';
-    }
+        const moodList = document.querySelector('#mood-list');
+        const currDate = new Date().getTime();
+        const moodForm = document.querySelector('#add-mood-form');
+        const signupForm = document.querySelector('#myForm');
 
 
-const moodList = document.querySelector('#mood-list');
-const currDate = new Date().getTime();
-const moodForm = document.querySelector('#add-mood-form');
-const signupForm = document.querySelector('#myForm');
+        //saving data
+        moodForm.addEventListener('submit', (e) => {
+            //prevents the entire page from being refreshed
+            e.preventDefault();
+            db.collection('moods').add({
+                mood: moodForm.mood.value,
+                date: new Date(),
+                user: db.collection('users').doc(user.uid)
 
-//create elements and render cafe
-// function renderMoods(doc){
-//     let li = document.createElement('li');
-//     let moodNum = document.createElement('span');
-//     let date = document.createElement('span');
-//     let user = document.createElement('span');
-
-//     li.setAttribute('data-id', doc.id);
-//     moodNum.textContent = doc.data().mood;
-//     date.textContent = doc.data().date;
-
-//     li.appendChild(moodNum);
-//     li.appendChild(date);
-
-//     moodList.appendChild(li);
-// }
-
-//getting data
-// db.collection('moods').get().then((snapshot) => {
-//     // console.log(snapshot.docs);
-//     snapshot.docs.forEach(doc => {
-//         renderMoods(doc);
-//     })
-// })
-
-//saving data
-moodForm.addEventListener('submit', (e) => {
-    //prevents the entire page from being refreshed
-    e.preventDefault();
-    db.collection('moods').add({
-        mood: moodForm.mood.value,
-        date: new Date(),
-        user: db.collection('users').doc(user.uid)
-
-    })
-    moodForm.mood.value = '';
-
-})
-
-
+            })
+            moodForm.mood.value = '';
+        })
 
 
 
@@ -123,7 +87,7 @@ moodForm.addEventListener('submit', (e) => {
         } else {
         // doc.data() will be undefined in this case
             console.log("No such document!");
-         }
+        }
         }).catch((error) => {
         console.log("Error getting document:", error);
     });
@@ -149,51 +113,38 @@ moodForm.addEventListener('submit', (e) => {
             console.log("Error getting documents: ", error);
         });
 
-        console.log(tableValues.length);
+        //print line graph
+        window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "Mood Chart"
+            },
+            data: [{        
+                type: "line",
+                indexLabelFontSize: 16,
+                dataPoints: [
+                    { x:1, y: parseInt(tableValues[0])},
+                    { x:2, y: parseInt(tableValues[1])},
+                    { x:3, y: parseInt(tableValues[2])},
+                    { x:4, y: parseInt(tableValues[3])},
+                    { x:5, y: parseInt(tableValues[4])},
+                    { x:6, y: parseInt(tableValues[5])},
+                    { x:7, y: parseInt(tableValues[6])},
 
 
-
-
-
-        console.log("length outside if-else: "+tableValues.length);
-    window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: "Mood Chart"
-        },
-        data: [{        
-            type: "line",
-              indexLabelFontSize: 16,
-            dataPoints: [
-                { x:1, y: parseInt(tableValues[0])},
-                { x:2, y: parseInt(tableValues[1])},
-                { x:3, y: parseInt(tableValues[2])},
-                { x:4, y: parseInt(tableValues[3])},
-                { x:5, y: parseInt(tableValues[4])},
-                { x:6, y: parseInt(tableValues[5])},
-                { x:7, y: parseInt(tableValues[6])},
-
-
-            ]
-        }]
-    });
+                ]
+            }]
+        });
     chart.render();
     }
     
-
-
-
-
-
-        // ...
     } else {
         // User is signed out.
-        // window.onload = function what(){
         document.getElementById("status").innerHTML = "Not Logged In";
-        // }
-        // ...
+        //redirect to login sign up page if not logged in
+        window.location = '/logsign.html';
     }
 
     });
