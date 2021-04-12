@@ -1,20 +1,17 @@
-*{
+/* *{
 	margin: 0;
 	padding: 0;
-}
+} */
 #emoji-body{
     padding-top:70px;
 }
 body {
-	margin: 0;
-	width: 1200px;
+	/* margin: 0; */
+	/* width: 1200px; */
 	max-width: 100%;
-	text-align: center;
+	/* text-align: center; */
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	/* position: absolute; */
    }
 
 .emoji__face,
@@ -965,9 +962,9 @@ body {
     background-color:#ADD8E6;
     background-position: center;
     background-size: cover;
-    padding-left: 8%;
-    padding-right: 8%;
-    box-sizing: border-box;
+    /* padding-left: 8%; */
+    /* padding-right: 8%; */
+    /* box-sizing: border-box; */
 }
 h1{
     /* min-width : 500px;
