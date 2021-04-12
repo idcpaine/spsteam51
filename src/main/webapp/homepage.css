@@ -1,6 +1,6 @@
 #homepage-big{
     padding-top: 100px;
-    /* height: 100vh; */
+    height: 100%;
     width: 100%;
     background-color:#ADD8E6;
     background-position: center;
@@ -33,11 +33,15 @@ h3 {
 }
 
 .textBox {
+  text-align: center;
+  width: 50px;
+
             height:40px;
             border-radius:0.5em;
         }
         
 .button {
+  font-weight: bold;
   display: inline-block;
   border-radius: 4px;
   background-color: #f4511e;
