@@ -107,7 +107,9 @@
                 console.log("length inside: "+ tableValues.length);
                 // doc.data() is never undefined for query doc snapshots
                 // console.log(doc.id, " => ", doc.data());
-                
+        //         res.innerHTML+= `
+        //   <h3 class="card-title">Mood: ${doc.data().mood} </h3>
+        //     `
             });
         })
         .catch((error) => {
@@ -126,7 +128,7 @@
                 type: "line",
                 indexLabelFontSize: 16,
                 dataPoints: [
-                    {y: parseInt(tableValues[0]), label: moodUserList[0].date.toString()},
+                    {y: parseInt(tableValues[0]), label: Date(moodUserList[0].date).toString()},
                     {y: parseInt(tableValues[1]), label: "fish"},
                     {y: parseInt(tableValues[2]), label: "star"},
                     {y: parseInt(tableValues[3]), label: "friey"},
