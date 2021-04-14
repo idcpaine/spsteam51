@@ -48,8 +48,10 @@
     firebase.analytics();
     var db = firebase.firestore();
 
-
+    //stores all of JUST a given users mood
     var tableValues = new Array(0);
+    //stores all of the objects from a given user from the 'moods' collection
+    var moodUserList = new Array(0);
     firebase.auth().onAuthStateChanged(function(user) {
     let res = document.getElementById("printName");
     res.innerHTML = '';
@@ -95,18 +97,17 @@
 
 //print mood of user
 
-        db.collection("moods").limit(7).where("user", "==", db.collection("users").doc(user.uid))
+        db.collection("moods").where("user", "==", db.collection("users").doc(user.uid))
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 tableValues.push(doc.data().mood);
+                moodUserList.push(doc.data());
                 console.log("mood recorded: "+doc.data().mood);
                 console.log("length inside: "+ tableValues.length);
                 // doc.data() is never undefined for query doc snapshots
                 // console.log(doc.id, " => ", doc.data());
-                res.innerHTML+= `
-          <h3 class="card-title">Mood: ${doc.data().mood} </h3>
-            `
+                
             });
         })
         .catch((error) => {
@@ -125,13 +126,13 @@
                 type: "line",
                 indexLabelFontSize: 16,
                 dataPoints: [
-                    { x:1, y: parseInt(tableValues[0])},
-                    { x:2, y: parseInt(tableValues[1])},
-                    { x:3, y: parseInt(tableValues[2])},
-                    { x:4, y: parseInt(tableValues[3])},
-                    { x:5, y: parseInt(tableValues[4])},
-                    { x:6, y: parseInt(tableValues[5])},
-                    { x:7, y: parseInt(tableValues[6])},
+                    {y: parseInt(tableValues[0]), label: moodUserList[0].date.toString()},
+                    {y: parseInt(tableValues[1]), label: "fish"},
+                    {y: parseInt(tableValues[2]), label: "star"},
+                    {y: parseInt(tableValues[3]), label: "friey"},
+                    {y: parseInt(tableValues[4]), label: "GO TEAM!"},
+                    {y: parseInt(tableValues[5]), label: "Huh?"},
+                    {y: parseInt(tableValues[6]), label: "well"},
 
 
                 ]
