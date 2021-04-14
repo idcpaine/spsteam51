@@ -76,14 +76,19 @@
             const inpemail = signupForm['email'].value;
             const inppass = signupForm['password'].value;
             firebase.auth().createUserWithEmailAndPassword(inpemail, inppass).then( cred =>{
+                console.log("entered");
                 return db.collection('users').doc(cred.user.uid).set({ //cred.user.uid gets the user id
-      
+                  
                   name: signupForm['name'].value
                 });
-                console.log(cred);
+                
+                
+                // console.log(name);
+                // console.log(cred.user.uid);
+
             })
 
-        })
+        }) 
         </script>
       </body>
 
